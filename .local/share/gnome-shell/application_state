@@ -3,9 +3,9 @@
   <context id="">
     <application id="org.gnome.Nautilus.desktop" score="7" last-seen="1747800180"/>
     <application id="org.gnome.Shell.PortalHelper.desktop" score="172564858.84375" last-seen="1709796672"/>
-    <application id="org.gnome.Terminal.desktop" score="9080" last-seen="1747800180"/>
-    <application id="firefox_firefox.desktop" score="773" last-seen="1747800177"/>
-    <application id="org.gnome.gedit.desktop" score="12105" last-seen="1747800061"/>
+    <application id="org.gnome.Terminal.desktop" score="9123" last-seen="1747800578"/>
+    <application id="firefox_firefox.desktop" score="778" last-seen="1747800512"/>
+    <application id="org.gnome.gedit.desktop" score="12106" last-seen="1747800540"/>
     <application id="update-manager.desktop" score="0" last-seen="1747645863"/>
   </context>
 </application-state>
