@@ -377,12 +377,12 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="trash:///t" added="2025-05-21T02:54:56.323856Z" modified="2025-05-21T03:58:37.052900Z" visited="2025-05-21T02:54:56.323856Z">
+  <bookmark href="trash:///t" added="2025-05-21T02:54:56.323856Z" modified="2025-05-21T04:13:29.147632Z" visited="2025-05-21T02:54:56.323856Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="text/plain"/>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2025-05-21T03:58:37.052900Z" count="7"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2025-05-21T04:13:29.147631Z" count="8"/>
         </bookmark:applications>
       </metadata>
     </info>

@@ -1092,3 +1092,42 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/Charan-K145/hello-maven.git
 git push -u origin main
+sudo apt update && sudo apt install git -y
+cd
+sudo apt update && sudo apt install git -y
+git config --global user.name "Charan-K145"
+git config --global user.email "chk22ainds@cmrit.ac.in"
+git config --global init.defaultBranch main
+ssh-keygen -t rsa -b 4096 -C "your-email@example.com" -f ~/.ssh/id_rsa -N ""
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+ssh -T git@github.com
+curl -H "Authorization: token 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"      -d '{"name":"hello-maven", "private":false}'      https://api.github.com/user/repos
+cd hello-maven
+echo "# hello-maven" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Charan-K145/hello-maven.git
+git push -u origin main
+cd
+echo "# hello-maven" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Charan-K145/hello-maven.git
+git push -u origin main
+echo "# hello-maven" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Charan-K145/hello-maven.git
+git push -u origin main
+sudo apt update && sudo apt install git -y
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+git config --global init.defaultBranch main
