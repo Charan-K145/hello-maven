@@ -1,0 +1,193 @@
+sudo update-alternatives --config java    (select  jdk 8)
+
+mvn archetype:generate -DgroupId=com.example -DartifactId=hello-maven -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+cd hello-maven
+mvn package
+mvn clean
+
+cd 
+
+select java version 21 or 17
+
+#uninstall jenkins
+sudo systemctl stop jenkins
+sudo systemctl disable jenkins
+sudo apt remove --purge jenkins -y
+sudo deluser --remove-home jenkins
+sudo delgroup jenkins
+sudo rm -rf /var/lib/jenkins /etc/jenkins /var/log/jenkins /usr/lib/jenkins /var/cache/jenkins /run/jenkins
+sudo systemctl daemon-reload
+dpkg -l | grep jenkins
+
+sudo apt update
+sudo apt install openjdk-21-jdk -y
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins -y
+sudo systemctl status jenkins
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+-get password goto localhost and login and install required plugins
+
+sudo apt update && sudo apt install git -y
+
+git --version
+
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+git config --global init.defaultBranch main
+
+ssh-keygen -t rsa -b 4096 -C "your-email@example.com" -f ~/.ssh/id_rsa -N ""
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+cat ~/.ssh/id_rsa.pub
+-copy and paste in github ssh something
+
+ssh -T git@github.com
+
+-get token from settings->developer settings->Tokens->Generate new Token
+
+curl -H "Authorization: token YOUR_TOKEN" \
+     -d '{"name":"hello-maven", "private":false}' \
+     https://api.github.com/user/repos
+
+github alli sigo some code na copy paste to terminal and instead of readme add .
+
+jenkins -> new item-> pipeline -> script
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                // Clone the repository from GitHub
+                git branch: 'main', url: 'https://github.com/azadCMRIT/hello-maven.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the Maven project
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run unit tests
+                sh 'mvn test'
+            }
+        }
+
+        // You can add more stages here, e.g., Deploy, SonarQube analysis, etc.
+    }
+}
+
+
+computer->var->lib->jenkins->workspace->mavenpro open in terminal
+
+sudo nano deploy.yaml
+
+---
+- name: Deploy Artifact to Localhost
+  hosts: localhost
+  become: true
+  become_user: student-devops
+  become_method: su
+
+  tasks:
+    - name: Copy the artifact to the target location
+      copy:
+        src: "/var/lib/jenkins/workspace/maven/target/hello-maven-1.0-SNAPSHOT.jar"
+        dest: "/home/student-devops/Desktop/t.jar"
+
+go to target and a jar file copy its path and paste it in src
+
+sudo nano hosts.ini
+
+[local]
+localhost ansible_connection=local
+
+cd come out of every thing
+in desktop create t.jar copy its path and paste it in deploy.yml file
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/azadCMRIT/hello-maven2.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Run the Ansible playbook with password as extra var
+                sh '''
+                export ANSIBLE_HOST_KEY_CHECKING=False
+                ansible-playbook -i /var/lib/jenkins/workspace/maven2/hosts.ini /var/lib/jenkins/workspace/maven2/deploy.yaml --extra-vars='ansible_become_pass=login@123'
+                '''
+            }
+        }
+    }
+}
+
+
+
+ANSIBLE
+
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install ansible -y
+
+ansible --version
+
+nano hosts.ini
+
+[local]
+localhost ansible_connection=local
+
+nano setup.yml
+
+---
+- name: Basic Server Setup
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+
+ansible-playbook -i hosts.ini setup.yml
+
+
+
+
